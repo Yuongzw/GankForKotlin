@@ -1,0 +1,88 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        //阿里路由框架配置
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (isBuildModule.toBoolean()) {
+            } else {
+                resources {
+                    //正式版本时，排除debug文件夹下所有调试文件
+                    exclude 'src/debug/*'
+                }
+            }
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api project(':library_res')
+    //公用的support相关库在base中依赖
+    api rootProject.ext.support["design"]
+    api rootProject.ext.support["appcompat-v7"]
+    api rootProject.ext.support["constraint-layout"]
+
+    api 'com.alibaba:arouter-api:1.4.1'
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycle-components"]
+    api rootProject.ext.dependencies["rxbinding"]
+    api rootProject.ext.dependencies["rxpermissions"]
+    api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["okhttp-urlconnection"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["converter-scalars"]
+    api rootProject.ext.dependencies["adapter-rxjava"]
+    api rootProject.ext.dependencies["dagger2"]
+    kapt rootProject.ext.dependencies["dagger2-compiler"]
+
+    api "com.tencent.matrix:matrix-android-lib:${MATRIX_VERSION}"
+    api "com.tencent.matrix:matrix-android-commons:${MATRIX_VERSION}"
+    api "com.tencent.matrix:matrix-trace-canary:${MATRIX_VERSION}"
+    api "com.tencent.matrix:matrix-resource-canary-android:${MATRIX_VERSION}"
+    api "com.tencent.matrix:matrix-resource-canary-common:${MATRIX_VERSION}"
+    api "com.tencent.matrix:matrix-io-canary:${MATRIX_VERSION}"
+    api "com.tencent.matrix:matrix-sqlite-lint-android-sdk:${MATRIX_VERSION}"
+}
+
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs xmlns:tools="http://schemas.android.com/tools"
+      tools:ignore="ResourceName">
+    <tab
+        icon="@drawable/ic_home"
+        id="@+id/tab_home"
+        title="主页"
+        inActiveColor="#353535"
+        activeColor="#f9f6f6"
+        barColorWhenSelected="#f4be2a"
+         />
+    <tab
+        icon="@drawable/ic_category"
+        id="@+id/tab_tree"
+        title="分类"
+        inActiveColor="#353535"
+        activeColor="#f9f6f6"
+        barColorWhenSelected="#fa7d56" />
+
+    <tab
+        icon="@drawable/ic_welfare"
+        id="@+id/tab_wechat"
+        title="福利"
+        inActiveColor="#353535"
+        activeColor="#f9f6f6"
+        barColorWhenSelected="#f968a9" />
+    <tab
+        icon="@drawable/ic_leisure"
+        id="@+id/tab_project"
+        title="闲读"
+        inActiveColor="#353535"
+        activeColor="#f9f6f6"
+        barColorWhenSelected="#724e42" />
+</tabs>

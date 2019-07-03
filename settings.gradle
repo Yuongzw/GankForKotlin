@@ -1,0 +1,1 @@
+include ':app', ':library_base', ':module_home', ':library_res', ':module_category', ':module_welfare', ':module_xiandu', ':module_search', ':module_main'
